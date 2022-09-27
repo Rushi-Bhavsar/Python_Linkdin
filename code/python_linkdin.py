@@ -38,8 +38,20 @@ class PythonLinkedin:
         self.driver.get(self.__cred_data.logout)
         sleep(3)
 
-    def search_by_role(self, role):
-        pass
+    def get_search_url(self, role):
+        """
+        Search by the keyword and return the search url.
+        :param role: Job Designation.
+        :return: Search result URL.
+        """
+        search_bar = self.driver.find_element(by=By.XPATH, value='//*[@id="global-nav-typeahead"]/input')
+        search_bar.send_keys(role)
+        search_bar.send_keys(Keys.ENTER)
+        sleep(5)
+        search_by_people = self.driver.find_element(by=By.XPATH, value='//button[text()="People"]')
+        search_by_people.click()
+        sleep(5)
+        return self.driver.current_url
 
     def close_driver(self):
         """
