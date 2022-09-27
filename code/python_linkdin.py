@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from time import sleep
 from parse_yaml import cred_data
 
@@ -26,6 +27,7 @@ class PythonLinkedin:
         password.send_keys(self.__cred_data.password)
         login_btn = self.driver.find_element(by=By.XPATH, value="//button[@class='sign-in-form__submit-button']")
         login_btn.click()
+        sleep(5)
 
     def account_logout(self):
         """
@@ -61,11 +63,12 @@ class PythonLinkedin:
         self.driver.quit()
 
 
-pl = PythonLinkedin()
-pl.account_login()
-sleep(5)
-pl.account_logout()
-sleep(2)
-pl.close_driver()
+def driver_code():
+    pl = PythonLinkedin()
+    pl.account_login()
+    search_url = pl.get_search_url("senior python developer")
+    print(f"Search URL: {search_url}")
+    sleep(5)
 
 
+driver_code()
