@@ -74,9 +74,12 @@ class PythonLinkedin:
             print(f"Skill: {skill.text}")
             location = item.find_element(by=By.XPATH, value='.//div/div/div[2]/div[1]/div[2]/div[2]')
             print(f'Location: {location.text}')
-            info = item.find_element(by=By.XPATH, value='.//div/div/div[2]/div[2]/p')
-            print(f"Info: {info.text}")
-            print('-'*50)
+            try:
+                info = item.find_element(by=By.XPATH, value='.//div/div/div[2]/div[2]/p')
+                print(f"Info: {info.text}")
+                print('-'*50)
+            except NoSuchElementException:
+                print(f"No Info present.")
 
         return self.driver.current_url
 
